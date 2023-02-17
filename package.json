@@ -1,0 +1,19 @@
+{
+  "name": "hay-day-automation",
+  "version": "1.0.0",
+  "description": "An API that runs automations for the game \"Hay Day\" by Supercell in a Bluestacks emulator instance on my personal computer.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samneisewander/haydayautomation.git"
+  },
+  "author": "Sam Neisewander",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/samneisewander/haydayautomation/issues"
+  },
+  "homepage": "https://github.com/samneisewander/haydayautomation#readme"
+}
