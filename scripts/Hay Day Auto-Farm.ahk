@@ -14,29 +14,29 @@ Esc::ExitApp ; Exit script with Escape key
     }
     WinGetPos, X, Y, W, H, Hay Day Alt 2 ; Get the position/dimensions of Hay Day Window
 
-    ; MouseMove, (X + W//2), (Y + H//2) ; Moves mouse to roughly half the dims (center) of the window at X,Y
-    ; Sleep 1000
+    MouseMove, (X + W//2), (Y + H//2) ; Moves mouse to roughly half the dims (center) of the window at X,Y
+    Sleep 1000
 
-    ; ; Standardize Camera and Zoom Out
-    ; SendInput, {Down down}
-    ; Sleep 1000
-    ; SendInput, {Down up}
-    ; Loop 5{
-    ;     MouseMove, -200, -200, 10, R
-    ;     SendInput, {Click down}
-    ;     MouseMove, 200, 200, 10, R
-    ;     SendInput, {Click up}
-    ; }
-    ; Sleep 1000
+    ; Standardize Camera and Zoom Out
+    SendInput, {Down down}
+    Sleep 1000
+    SendInput, {Down up}
+    Loop 5{
+        MouseMove, -200, -200, 10, R
+        SendInput, {Click down}
+        MouseMove, 200, 200, 10, R
+        SendInput, {Click up}
+    }
+    Sleep 1000
 
-    ; ; Center Camera On Farm (dependant on WinGetPos having been declared)
-    ; MouseMove, (X + W*.5), (Y + H*.5) ; Moves mouse to half the dims (center) of the window at X,Y
-    ; MouseMove, (X + W*.8), (Y + H*.8), 30
-    ; SendInput, {Click down}
-    ; MouseMove, (X + W*.5), (Y + H*.3), 30
-    ; SendInput, {Click up}
+    ; Center Camera On Farm (dependant on WinGetPos having been declared)
+    MouseMove, (X + W*.5), (Y + H*.5) ; Moves mouse to half the dims (center) of the window at X,Y
+    MouseMove, (X + W*.8), (Y + H*.8), 30
+    SendInput, {Click down}
+    MouseMove, (X + W*.5), (Y + H*.3), 30
+    SendInput, {Click up}
 
-    ; Sleep 2000
+    Sleep 2000
 
 Loop 51{
     
