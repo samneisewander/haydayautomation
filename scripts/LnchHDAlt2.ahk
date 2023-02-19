@@ -9,7 +9,7 @@ if WinExist("Hay Day Alt 2") {
     WinWaitClose, Hay Day Alt 2
 }
 
-Run, C:\Users\samue\OneDrive\Desktop\Code\Hay Day Automation\lib\Hay Day Alt 2 ;Run a shortcut in lib
+Run, C:\Users\samue\OneDrive\Desktop\Code\Hay Day Automation\assets\Hay Day Alt 2 ;Run a shortcut in lib
 WinWait, Hay Day Alt 2 ; Wait
 WinActivate, Hay Day Alt 2 ; Activate
 WinMove, Hay Day Alt 2,, 0, 0, 1024, 576 ; Move window to top left of monitor

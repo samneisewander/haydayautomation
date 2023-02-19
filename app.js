@@ -3,7 +3,9 @@ require('dotenv').config()
 const express = require('express')
 const ahk = require('./lib/ahk.js')
 const path = require('path')
-
+const { createWorker } = require('tesseract.js');
+const sharp = require('sharp')
+const screenshot = require('screenshot-desktop')
 
 //Init Application
 const app = require('express')()
@@ -21,7 +23,7 @@ const routes = require('./lib/router.js')
 app.use(routes)
 
 //Initialize Hay Day Instance / Run some automations
-async function main() {
+async function initialize() {
     await ahk.exec("LnchHDalt2.ahk") // Launch Hay Day
         .then(() => {
             console.log('Launched.')
@@ -36,16 +38,73 @@ async function main() {
         .catch((err) => {
             console.warn(err)
         })
-    await ahk.exec("PlantCorn.ahk") // Harvest and plant corn crops
+}
+
+async function farmWheat() {
+    let lvl = await checkLvl()
+    await ahk.exec("PlantWheat.ahk") // Harvest and plant wheat crops
         .then(() => {
-            console.log('Corn Planted.')
+            console.log('Wheat Planted.')
         })
         .catch((err) => {
             console.warn(err)
-        }) 
+        })
+    if(await checkLvl() != lvl) {
+        initialize().then(farmWheat)
+        return
+    }
+    setTimeout(farmWheat, 1000 * 60 * 2 /*2 minutes*/)
+
+    await ahk.exec("SellStockpile.ahk")
+        .then(() => {
+            console.log('Stockpile put on sale.')
+        })
+        .catch((err) => {
+            console.warn(err)
+        })
+    
 }
 
-main()
+async function checkLvl() {
+    let imgPath = './assets/screenshot.jpg'
+    let cropPath = './assets/cropped.jpg'
+    await ahk.exec('FocusHayDay.ahk')
+    await screenshot({ filename: imgPath })
+        .then(() => {
+            console.log('Screenshot taken.')
+        })
+        .catch((err) => {
+            console.warn(err)
+            return
+        })
+    await sharp(imgPath)
+        .extract({ left: 375, top: 35, width: 25, height: 30 })
+        .toFile(cropPath)
+        .then(info => {
+            console.log(info, 'Image cropped.')
+        })
+        .catch(err => {
+            console.warn(err)
+            return
+        })
+    const tesseract = await createWorker()
+    await tesseract.loadLanguage('eng')
+    await tesseract.initialize('eng')
+    await tesseract.setParameters({ tessedit_char_whitelist: "1234567890" })
+    const { data: { text } } = await tesseract.recognize(cropPath);
+    await tesseract.terminate();
+    return text
+}
+
+async function test() {
+    await ahk.exec("Test.ahk")
+}
+
+initialize().then(farmWheat)
+
+
+
+
 
 //Listen
 app.listen(3000)
