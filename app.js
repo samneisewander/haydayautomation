@@ -81,7 +81,7 @@ async function checkLvl() {
         .extract({ left: 375, top: 35, width: 25, height: 30 })
         .toFile(cropPath)
         .then(info => {
-            console.log(info, 'Image cropped.')
+            console.log('Image cropped.')
         })
         .catch(err => {
             console.warn(err)
@@ -91,7 +91,8 @@ async function checkLvl() {
     await tesseract.loadLanguage('eng')
     await tesseract.initialize('eng')
     await tesseract.setParameters({ tessedit_char_whitelist: "1234567890" })
-    const { data: { text } } = await tesseract.recognize(cropPath);
+    const { data: { text } } = await tesseract.recognize(cropPath)
+    console.log('Level read as ' + text)
     await tesseract.terminate();
     return text
 }
