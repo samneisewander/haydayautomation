@@ -48,6 +48,24 @@ Loop 5{
     Sleep 1000
 }
 
+; Safeguard against box-locking behavior. Double checks that advertisement is placed.
+MouseMove, 280, 280 ; Navigate to first slot and open
+SendInput, {Click}
+
+; Check for flashing advertise button
+PixelGetColor, Color1, 557, 300, RGB
+Sleep 1000
+PixelGetColor, Color2, 557, 300, RGB
+
+if(Color1 != Color2){
+    ; If ad available, select it
+    MouseMove, 557, 300
+    SendInput, {Click}
+    Sleep 1000
+    MouseMove, 491, 375
+    SendInput, {Click}
+}
+
 MouseMove, 126, 103 ; Close unwanted GUI
 Loop 3{
     SendInput, {Click}

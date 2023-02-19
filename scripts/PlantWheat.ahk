@@ -20,9 +20,9 @@ PixelSearch,,, MouseX, MouseY, MouseX - 200, MouseY - 130, 0xFFF8BA,, Fast RGB ;
 if (ErrorLevel != 0){
     ; Crop GUI not found, ready to harvest
 
-    MouseMove, -70, -20,, R ; Move relatively to expected location of scythe
+    MouseMove, -70, -20, 10, R ; Move relatively to expected location of scythe
     SendInput, {Click down}
-    MouseMove, -200, -100,, R ; Move mouse to arbitrary top left region
+    MouseMove, -200, -100, 10, R ; Move mouse to arbitrary top left region
 
     HarvestWidth = 500 ; How wide, in pixels, to drag the scythe
     HarvestHeight = 300 ; How high, in pixels, to drag the scythe

@@ -41,7 +41,7 @@ async function initialize() {
 }
 
 async function farmWheat() {
-    let lvl = await checkLvl()
+    //let lvl = await checkLvl()
     await ahk.exec("PlantWheat.ahk") // Harvest and plant wheat crops
         .then(() => {
             console.log('Wheat Planted.')
@@ -49,11 +49,10 @@ async function farmWheat() {
         .catch((err) => {
             console.warn(err)
         })
-    if(await checkLvl() != lvl) {
-        initialize().then(farmWheat)
-        return
-    }
-    setTimeout(farmWheat, 1000 * 60 * 2 /*2 minutes*/)
+    // if(await checkLvl() != lvl) {
+    //     initialize().then(farmWheat)
+    //     return
+    // }
 
     await ahk.exec("SellStockpile.ahk")
         .then(() => {
@@ -65,46 +64,50 @@ async function farmWheat() {
     
 }
 
-async function checkLvl() {
-    let imgPath = './assets/screenshot.jpg'
-    let cropPath = './assets/cropped.jpg'
-    await ahk.exec('FocusHayDay.ahk')
-    await screenshot({ filename: imgPath })
-        .then(() => {
-            console.log('Screenshot taken.')
-        })
-        .catch((err) => {
-            console.warn(err)
-            return
-        })
-    await sharp(imgPath)
-        .extract({ left: 375, top: 35, width: 25, height: 30 })
-        .toFile(cropPath)
-        .then(info => {
-            console.log('Image cropped.')
-        })
-        .catch(err => {
-            console.warn(err)
-            return
-        })
-    const tesseract = await createWorker()
-    await tesseract.loadLanguage('eng')
-    await tesseract.initialize('eng')
-    await tesseract.setParameters({ tessedit_char_whitelist: "1234567890" })
-    const { data: { text } } = await tesseract.recognize(cropPath)
-    console.log('Level read as ' + text)
-    await tesseract.terminate();
-    return text
+// async function checkLvl() {
+//     let imgPath = './assets/screenshot.jpg'
+//     let cropPath = './assets/cropped.jpg'
+//     await ahk.exec('FocusHayDay.ahk')
+//     await screenshot({ filename: imgPath })
+//         .then(() => {
+//             console.log('Screenshot taken.')
+//         })
+//         .catch((err) => {
+//             console.warn(err)
+//             return
+//         })
+//     await sharp(imgPath)
+//         .extract({ left: 375, top: 35, width: 25, height: 35 })
+//         .toFile(cropPath)
+//         .then(info => {
+//             console.log('Image cropped.')
+//         })
+//         .catch(err => {
+//             console.warn(err)
+//             return
+//         })
+//     let tesseract = await createWorker()
+//     await tesseract.loadLanguage('eng')
+//     await tesseract.initialize('eng')
+//     await tesseract.setParameters({ tessedit_char_whitelist: "1234567890" })
+//     let { data: { text } } = await tesseract.recognize(cropPath)
+//     console.log('Level read as ' + text)
+//     await tesseract.terminate();
+//     return text
+// }
+// async function test() {
+//     await ahk.exec("Test.ahk")
+// }
+
+async function initFarmLoop() {
+    // Initializes and farms repeatedly on an interval. See bellow comment
+    await farmWheat()
+    await initialize()
+    setTimeout(initFarmLoop, 1000 * 60 * 2 /*2 minutes*/)
 }
 
-async function test() {
-    await ahk.exec("Test.ahk")
-}
 
-initialize().then(farmWheat)
-
-
-
+initialize().then(initFarmLoop)
 
 
 //Listen
