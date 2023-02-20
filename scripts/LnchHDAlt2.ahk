@@ -2,6 +2,7 @@
 
 ; Launches the shortcut for the Bluestacks instance 'Hay Day Alt 2' and opens/focuses Hay Day.
 
+#SingleInstance FORCE
 if WinExist("Hay Day Alt 2") {
     ; Clause to catch open instances and reset them.
     WinGet, ID, PID, Hay Day Alt 2

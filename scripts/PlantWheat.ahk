@@ -1,3 +1,4 @@
+#SingleInstance FORCE
 WinActivate, Hay Day Alt 2 ; Activate
 CoordMode, Mouse, Window ; Some configuration stuff
 WinGetPos, X, Y, W, H, Hay Day Alt 2 ; Get the position/dimensions of Hay Day Window
@@ -25,9 +26,9 @@ if (ErrorLevel != 0){
     MouseMove, -200, -100, 10, R ; Move mouse to arbitrary top left region
 
     HarvestWidth = 500 ; How wide, in pixels, to drag the scythe
-    HarvestHeight = 220 ; How high, in pixels, to drag the scythe
+    HarvestHeight = 230 ; How high, in pixels, to drag the scythe
     MouseSpeed = 5 ; How quickly to move the mouse. 0 is instant, 100 slowest
-    Detail = 28 ; How many passes should be made in the specified area.
+    Detail = 30 ; How many passes should be made in the specified area.
 
     Loop %Detail%{
         if(Mod(A_Index, 2) != 0){
@@ -62,9 +63,9 @@ MouseMove, 472, 370, ; Move to expected location of crop tile
 MouseMove, -200, -100,, R ; Move mouse to arbitrary top left region
 
 PlantWidth = 500 ; How wide, in pixels, to drag the scythe
-PlantHeight = 220 ; How high, in pixels, to drag the scythe
+PlantHeight = 230 ; How high, in pixels, to drag the scythe
 MouseSpeed = 5 ; How quickly to move the mouse. 0 is instant, 100 slowest
-Detail = 28 ; How many passes should be made in the specified area.
+Detail = 30 ; How many passes should be made in the specified area.
 
 Loop %Detail%{
     if(Mod(A_Index, 2) != 0){

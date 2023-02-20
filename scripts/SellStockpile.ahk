@@ -1,3 +1,4 @@
+#SingleInstance FORCE
 WinActivate, Hay Day Alt 2 ; Activate
 CoordMode, Mouse, Window ; Some configuration stuff
 WinGetPos, X, Y, W, H, Hay Day Alt 2 ; Get the position/dimensions of Hay Day Window
@@ -25,16 +26,17 @@ Loop 5{
         MouseMove, 700, 220 ; Navigate to plus button
         SendInput, {Click 9} ; Max
         MouseMove, 700, 280 ; Navigate to plus button
-        SendInput, {Click 10} ; Add 10 coins to price
+        Loop 10{
+            SendInput, {Click} ; Add 10 coins to price
+            Sleep 100
+        }
 
         ; Check for flashing advertise button
         PixelGetColor, Color1, 590, 400, RGB
         Sleep 100
         PixelGetColor, Color2, 590, 400, RGB
-        Sleep 100
-        PixelGetColor, Color3, 590, 400, RGB
 
-        if(Color1 != Color2 || Color1 != Color3){
+        if(Color1 != Color2){
             ; If ad available, select it
             MouseMove, 590, 400
             SendInput, {Click}

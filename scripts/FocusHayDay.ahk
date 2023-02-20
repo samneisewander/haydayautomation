@@ -1,3 +1,5 @@
+#SingleInstance FORCE
+
 WinActivate, Hay Day Alt 2 ; Activate
 
 ExitApp
