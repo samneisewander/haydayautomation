@@ -106,11 +106,7 @@ async function initFarmLoop() {
     await initialize()
 }
 
-
-//initialize().then(initFarmLoop)
-farmWheat()
-
-//ahk.exec('Test.ahk')
+initialize().then(initFarmLoop)
 
 //Listen
 app.listen(3000)
