@@ -54,7 +54,7 @@ Loop 5{
     MouseMove, 280 + 100*(A_Index - 1), 390
     MouseGetPos, MouseX, MouseY
 
-    PixelSearch,,, MouseX - 25, MouseY - 25, MouseX + 25, MouseY + 25, 0x043052,, Fast RGB
+    PixelSearch,,, MouseX - 25, MouseY - 25, MouseX + 25, MouseY + 25, 0xFFF8B8,, Fast RGB
     if(ErrorLevel == 0){
         ; Box is sold
         SendInput, {Click}
