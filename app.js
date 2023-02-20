@@ -102,13 +102,13 @@ async function farmWheat() {
 async function initFarmLoop() {
     // Initializes and farms repeatedly on an interval. See bellow comment
     await farmWheat()
-    await initialize()
     setTimeout(initFarmLoop, 1000 * 60 * 2 /*2 minutes*/)
+    await initialize()
 }
 
 
 initialize().then(initFarmLoop)
-
+//ahk.exec('Test.ahk')
 
 //Listen
 app.listen(3000)

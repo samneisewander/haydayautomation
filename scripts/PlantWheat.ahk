@@ -20,25 +20,25 @@ PixelSearch,,, MouseX, MouseY, MouseX - 200, MouseY - 130, 0xFFF8BA,, Fast RGB ;
 if (ErrorLevel != 0){
     ; Crop GUI not found, ready to harvest
 
-    MouseMove, -70, -20, 10, R ; Move relatively to expected location of scythe
+    MouseMove, -85, -20, 10, R ; Move relatively to expected location of scythe
     SendInput, {Click down}
     MouseMove, -200, -100, 10, R ; Move mouse to arbitrary top left region
 
     HarvestWidth = 500 ; How wide, in pixels, to drag the scythe
-    HarvestHeight = 300 ; How high, in pixels, to drag the scythe
-    MouseSpeed = 10 ; How quickly to move the mouse. 0 is instant, 100 slowest
-    Detail = 30 ; How many passes should be made in the specified area.
+    HarvestHeight = 220 ; How high, in pixels, to drag the scythe
+    MouseSpeed = 5 ; How quickly to move the mouse. 0 is instant, 100 slowest
+    Detail = 28 ; How many passes should be made in the specified area.
 
     Loop %Detail%{
         if(Mod(A_Index, 2) != 0){
             ; Odd Iteration
             MouseMove, HarvestWidth, 0, MouseSpeed, R
-            MouseMove, 0, HarvestHeight/Detail, MouseSpeed, R
+            MouseMove, 0, HarvestHeight/Detail, 0, R
         }
         else{
             ; Even Iteration
             MouseMove, -HarvestWidth, 0, MouseSpeed, R
-            MouseMove, 0, HarvestHeight/Detail, MouseSpeed, R
+            MouseMove, 0, HarvestHeight/Detail, 0, R
         }
     }
     SendInput, {Click up}
@@ -62,20 +62,20 @@ MouseMove, 472, 370, ; Move to expected location of crop tile
 MouseMove, -200, -100,, R ; Move mouse to arbitrary top left region
 
 PlantWidth = 500 ; How wide, in pixels, to drag the scythe
-PlantHeight = 300 ; How high, in pixels, to drag the scythe
-MouseSpeed = 10 ; How quickly to move the mouse. 0 is instant, 100 slowest
-Detail = 30 ; How many passes should be made in the specified area.
+PlantHeight = 220 ; How high, in pixels, to drag the scythe
+MouseSpeed = 5 ; How quickly to move the mouse. 0 is instant, 100 slowest
+Detail = 28 ; How many passes should be made in the specified area.
 
 Loop %Detail%{
     if(Mod(A_Index, 2) != 0){
         ; Odd Iteration
         MouseMove, PlantWidth, 0, MouseSpeed, R
-        MouseMove, 0, PlantHeight/Detail, MouseSpeed, R
+        MouseMove, 0, PlantHeight/Detail, 0, R
     }
     else{
         ; Even Iteration
         MouseMove, -PlantWidth, 0, MouseSpeed, R
-        MouseMove, 0, PlantHeight/Detail, MouseSpeed, R
+        MouseMove, 0, PlantHeight/Detail, 0, R
     }
 }
 SendInput, {Click up}
