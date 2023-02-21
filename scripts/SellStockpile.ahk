@@ -26,10 +26,6 @@ Loop 5{
         MouseMove, 700, 220 ; Navigate to plus button
         SendInput, {Click 9} ; Max
         MouseMove, 700, 280 ; Navigate to plus button
-        Loop 10{
-            SendInput, {Click} ; Add 10 coins to price
-            Sleep 100
-        }
 
         ; Check for flashing advertise button
         PixelGetColor, Color1, 590, 400, RGB
@@ -69,10 +65,6 @@ Loop 5{
         MouseMove, 700, 220 ; Navigate to plus button
         SendInput, {Click 9} ; Max
         MouseMove, 700, 280 ; Navigate to plus button
-        Loop 10{
-            SendInput, {Click} ; Add 10 coins to price
-            Sleep 100
-        }
 
         ; Check for flashing advertise button
         PixelGetColor, Color1, 590, 400, RGB

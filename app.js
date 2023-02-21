@@ -26,14 +26,14 @@ app.use(routes)
 async function initialize() {
     await ahk.exec("LnchHDalt2.ahk") // Launch Hay Day
         .then(() => {
-            console.log('Launched.')
+            console.log(`Initialized at ${new Date(Date.now()).toTimeString()}`)
         })
         .catch((err) => {
             console.warn(err)
         })
     await ahk.exec("StandardizeCamera.ahk") // Set the game's camera to a standard position.
         .then(() => {
-            console.log('Camera Positioned.')
+            console.log(`Initialized at ${new Date(Date.now()).toTimeString()}`)
         })
         .catch((err) => {
             console.warn(err)
@@ -44,7 +44,7 @@ async function farmWheat() {
     //let lvl = await checkLvl()
     await ahk.exec("PlantWheat.ahk") // Harvest and plant wheat crops
         .then(() => {
-            console.log('Wheat Planted.')
+            console.log(`Wheat planted at ${new Date(Date.now()).toTimeString()}`)
         })
         .catch((err) => {
             console.warn(err)
@@ -61,7 +61,7 @@ async function farmWheat() {
         .catch((err) => {
             console.warn(err)
         })
-    
+
 }
 
 // async function checkLvl() {
@@ -99,16 +99,29 @@ async function farmWheat() {
 //     await ahk.exec("Test.ahk")
 // }
 
-async function initFarmLoop() {
-    // Initializes and farms repeatedly on an interval. See bellow comment
+async function reloadFarmLoop() {
+    // Initializes and farms repeatedly on an interval. See below comment
     await farmWheat()
-    setTimeout(initFarmLoop, 1000 * 60 * 2 /*2 minutes*/)
-    await initialize()
+    setTimeout(reloadFarmLoop, 1000 * 60 * 2 /*2 minutes*/)
+    await ahk.exec('RelaunchApp.ahk')
+        .then(() => {
+            console.log(`App relaunched at ${new Date(Date.now()).toTimeString()}`)
+        })
+        .catch((err) => {
+            console.warn(err)
+        })
+    await ahk.exec("StandardizeCamera.ahk")
+        // Set the game's camera to a standard position.
+        .then(() => {
+            console.log(`Camera positioned at ${new Date(Date.now()).toTimeString()}`)
+        })
+        .catch((err) => {
+            console.warn(err)
+        })
 }
 
-initialize().then(initFarmLoop)
-
+initialize().then(reloadFarmLoop)
 
 //Listen
 app.listen(3000)
-console.log('Listening on port 3000.')
+console.log(`Listening on port 3000 at ${new Date(Date.now()).toTimeString()}`)
