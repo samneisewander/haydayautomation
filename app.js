@@ -101,6 +101,7 @@ async function farmWheat() {
 
 async function reloadFarmLoop() {
     // Initializes and farms repeatedly on an interval. See below comment
+    await ahk.exec('FocusHayDay.ahk')
     await farmWheat()
     setTimeout(reloadFarmLoop, 1000 * 60 * 2 /*2 minutes*/)
     await ahk.exec('RelaunchApp.ahk')
@@ -121,6 +122,7 @@ async function reloadFarmLoop() {
 }
 
 initialize().then(reloadFarmLoop)
+
 
 //Listen
 app.listen(3000)
