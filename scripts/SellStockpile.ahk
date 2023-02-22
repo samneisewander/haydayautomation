@@ -1,6 +1,5 @@
 #SingleInstance FORCE
 WinActivate, Hay Day Alt 2 ; Activate
-WinMove, Hay Day Alt 2,, 0, 0, 1024, 576 ; Move window to top left of monitor
 CoordMode, Mouse, Window ; Some configuration stuff
 WinGetPos, X, Y, W, H, Hay Day Alt 2 ; Get the position/dimensions of Hay Day Window
 
@@ -51,7 +50,7 @@ Loop 5{
     MouseMove, 280 + 100*(A_Index - 1), 390
     MouseGetPos, MouseX, MouseY
 
-    PixelSearch,,, MouseX - 25, MouseY - 25, MouseX + 25, MouseY + 25, 0xFFF8B8,, Fast RGB
+    PixelSearch,,, MouseX - 25, MouseY - 25, MouseX + 25, MouseY + 25, 0x0F3751,, Fast RGB
     if(ErrorLevel == 0){
         ; Box is sold
         SendInput, {Click}
